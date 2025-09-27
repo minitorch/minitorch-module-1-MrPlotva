@@ -164,7 +164,7 @@ class Scalar:
         assert h.ctx is not None
 
         fn = h.last_fn
-        grads = fn.backward(h.ctx, d_output)
+        grads = fn._backward(h.ctx, d_output)
 
         if not isinstance(grads, tuple) and not isinstance(grads, list):
             grads = (grads,)
