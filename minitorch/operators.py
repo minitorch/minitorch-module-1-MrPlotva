@@ -69,15 +69,12 @@ def max(x: float, y: float) -> float:
 
 def is_close(x: float, y: float) -> bool:
     """is_close"""
-    return abs(x - y) < 1e-2
+    return abs(x - y) < 1e-3
 
 
 def sigmoid(x: float) -> float:
     """Sigmoid"""
-    if x >= 0:
-        return 1.0 / (1.0 + math.exp(-x))
-    else:
-        return math.exp(x) / (1.0 + math.exp(x))
+    return 1.0 / (1.0 + math.exp(-x))
 
 
 def relu(x: float) -> float:

@@ -102,20 +102,21 @@ def test_eq(a: float) -> None:
 @pytest.mark.task0_2
 @given(small_floats)
 def test_sigmoid(a: float) -> None:
-    """Check properties of the sigmoid function, specifically"""
-    # It is always between 0.0 and 1.0
+    """Check properties of the sigmoid function, specifically
+    * It is always between 0.0 and 1.0.
+    * one minus sigmoid is the same as sigmoid of the negative
+    * It crosses 0 at 0.5
+    * It is  strictly increasing.
+    """
+
     s = sigmoid(a)
     assert 0.0 <= s <= 1.0, f"sigmoid({a}) = {s} is not in [0, 1]"
 
-    # One minus sigmoid is the same as sigmoid of the negative
     assert is_close(1 - s, sigmoid(-a)), f"1 - sigmoid({a}) != sigmoid(-{a})"
 
-    # It crosses 0.5 at 0
     if a == 0.0:
         assert is_close(s, 0.5), f"sigmoid(0) should be 0.5, got {s}"
 
-    # It is strictly increasing — check with a nearby point
-    # Since 'a' is random, compare with a slightly larger value
     b = a + 1e-3
     if b != a:
         assert sigmoid(a) <= sigmoid(
